@@ -10,10 +10,17 @@
 
     <h2>Last Read</h2>
     <h3>({{last_read[3]}})</h3>
-    <h1>{{last_read[0]}}</h1>
+    <h1>{{last_read[0]}} °C</h1>
     <hr>
 
     <h2>Statistics over time</h2>
+    <form action="/" method = "POST">
+        <p>From: <input type = "text" name = "date_start" /></p>
+        <p>To: <input type = "text" name = "date_end" /></p>
+        <p><input type = "submit" value = "Show" /></p>
+    </form>
+    <hr>
+    <img src="data:image/png;base64, {{ plot_url }}", alt="To get a plot, enter the time period above">
     <hr>
 </body>
 </html>

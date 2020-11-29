@@ -37,11 +37,11 @@ def fetch_last():
     return last
 
 
-def fetch_by_date(start, end):
+def fetch_specified(date_limits, temp_limits=(0, 50)):
     con = create_sql_connection()
     cursor_obj = con.cursor()
-    cursor_obj.execute('''SELECT * FROM sensor_data WHERE time BETWEEN datetime(?) AND datetime(?)''',
-                       (start, end))
+    cursor_obj.execute('''SELECT * FROM sensor_data WHERE time BETWEEN datetime(?) AND datetime(?) AND temperature BETWEEN ? AND ?''',
+                       (date_limits[0], date_limits[1], temp_limits[0], temp_limits[1]))
     records = cursor_obj.fetchall()
     cursor_obj.close()
     con.close()
