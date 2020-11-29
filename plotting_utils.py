@@ -1,7 +1,7 @@
 import io
 import base64
 import matplotlib.pyplot as plt
-from matplotlib.dates import DateFormatter
+from matplotlib.dates import ConciseDateFormatter, AutoDateLocator
 
 
 def gen_temp_plot(temperature, maximums, minimums, timestamps):
@@ -9,7 +9,7 @@ def gen_temp_plot(temperature, maximums, minimums, timestamps):
     fig, ax = plt.subplots()
 
     # prettify
-    ax.xaxis.set_major_formatter(DateFormatter('%d.%m %H:%M'))
+    ax.xaxis.set_major_formatter(ConciseDateFormatter(AutoDateLocator()))
     fig.autofmt_xdate(rotation=40)
     fig.tight_layout()
 
