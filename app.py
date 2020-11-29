@@ -1,9 +1,7 @@
 import os
 import time
-import io
-import base64
 
-from flask import Flask, redirect, url_for, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template
 from plotting_utils import *
 from database_utils import *
 from parsing_utils import *
@@ -25,16 +23,25 @@ app = Flask(__name__)
 @app.route('/', methods=['GET', 'POST'])
 def show_statistics():
     if request.method == 'POST':
+        # processing data from form
         form_data = request.form
+
+        # get start and end dates
         date_start = form_data['date_start']
         date_end = form_data['date_end']
+
+        # fetch data about temperature between these dates
         data = fetch_specified((date_start, date_end))
         temperature, maximums, minimums, timestamps = parse_graph_data(data)
+
+        # plot the data
         plot_url = gen_temp_plot(temperature, maximums, minimums, timestamps)
     else:
         plot_url = None
 
+    # get last record from database
     last_read = fetch_last()
+
     return render_template("stats.html", last_read=last_read, plot_url=plot_url)
 
 

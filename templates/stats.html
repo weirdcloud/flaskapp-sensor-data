@@ -14,13 +14,24 @@
     <hr>
 
     <h2>Statistics over time</h2>
+
     <form action="/" method = "POST">
-        <p>From: <input type = "text" name = "date_start" /></p>
-        <p>To: <input type = "text" name = "date_end" /></p>
+        <p>From:</p>
+        <p>
+            <input type = "text" name = "date_start"
+                        placeholder="2020-11-27 12:30:00" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}"/>
+        </p>
+        <p>To:</p>
+        <p>
+            <input type = "text" name = "date_end"
+                        placeholder="2020-11-28 19:30:00" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}"/>
+        </p>
         <p><input type = "submit" value = "Show" /></p>
     </form>
+
     <hr>
-    <img src="data:image/png;base64, {{ plot_url }}", alt="To get a plot, enter the time period above">
+    <img src="data:image/png;base64, {{ plot_url }}" alt="To get a plot, enter the time period in the form above">
     <hr>
+
 </body>
 </html>
