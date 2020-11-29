@@ -26,7 +26,23 @@ def insert_sql_table(con, temp, maximum, minimum, timestamp):
 def fetch_last():
     con = create_sql_connection()
     cursor_obj = con.cursor()
-    last = cursor_obj.execute('SELECT * FROM sensor_data ORDER BY time DESC LIMIT 1')
+    cursor_obj.execute('SELECT * FROM sensor_data ORDER BY time DESC LIMIT 1')
+    last = cursor_obj.fetchall()
     cursor_obj.close()
     con.close()
+    if len(last):
+        last = last[0]
+    else:
+        last = None
     return last
+
+
+def fetch_by_date(start, end):
+    con = create_sql_connection()
+    cursor_obj = con.cursor()
+    cursor_obj.execute('''SELECT * FROM sensor_data WHERE time BETWEEN datetime(?) AND datetime(?)''',
+                       (start, end))
+    records = cursor_obj.fetchall()
+    cursor_obj.close()
+    con.close()
+    return records

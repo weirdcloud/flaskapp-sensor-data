@@ -20,7 +20,8 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def show_statistics():
-    return render_template("stats.html")
+    last_read = fetch_last()
+    return render_template("stats.html", last_read=last_read)
 
 
 @app.route('/sensor', methods=['POST'])
