@@ -27,3 +27,5 @@ ENV/
 instance/
 .webassets-cache
 
+# database
+sensor_database.db
